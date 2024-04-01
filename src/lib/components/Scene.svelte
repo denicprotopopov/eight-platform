@@ -1,11 +1,15 @@
 <script>
   import { T } from '@threlte/core'
   import { ContactShadows, Float, Grid, OrbitControls } from '@threlte/extras'
+  import { TextureLoader } from 'three'
+  import { useLoader } from '@threlte/core'
+
+  const texture = useLoader(TextureLoader).load('/texture2.png')
 </script>
 
 <T.PerspectiveCamera
   makeDefault
-  position={[-10, 10, 10]}
+  position={[10, 1, 10]}
   fov={15}
 >
   <OrbitControls
@@ -13,7 +17,7 @@
     enableZoom={false}
     enableDamping
     autoRotateSpeed={0.5}
-    target.y={1.5}
+    target.y={1}
   />
 </T.PerspectiveCamera>
 
@@ -24,36 +28,36 @@
 />
 <T.AmbientLight intensity={0.2} />
 
-<Grid
+<!-- <Grid
   position.y={-0.001}
   cellColor="#ffffff"
   sectionColor="#ffffff"
   sectionThickness={0}
   fadeDistance={25}
   cellSize={2}
-/>
+/> -->
 
-<ContactShadows
+<!-- <ContactShadows
   scale={10}
   blur={2}
   far={2.5}
   opacity={0.5}
-/>
+/> -->
 
-<Float
-  floatIntensity={1}
-  floatingRange={[0, 1]}
->
+
   <T.Mesh
-    position.y={1.2}
-    position.z={-0.75}
-  >
-    <T.BoxGeometry />
-    <T.MeshStandardMaterial color="#0059BA" />
-  </T.Mesh>
-</Float>
+    
+  position.y={1.2}
 
-<Float
+  >
+    <T.SphereGeometry />
+  {#if $texture}
+    <T.MeshStandardMaterial map={$texture} roughness=0,453/>
+  {/if}
+  </T.Mesh>
+
+
+<!-- <Float
   floatIntensity={1}
   floatingRange={[0, 1]}
 >
@@ -63,7 +67,7 @@
     rotation.y={71}
   >
     <T.TorusKnotGeometry args={[0.5, 0.15, 100, 12, 2, 3]} />
-    <T.MeshStandardMaterial color="#F85122" />
+    <T.MeshStandardMaterial color="#F85122"/>
   </T.Mesh>
 </Float>
 
@@ -78,4 +82,4 @@
     <T.IcosahedronGeometry />
     <T.MeshStandardMaterial color="#F8EBCE" />
   </T.Mesh>
-</Float>
+</Float> -->
